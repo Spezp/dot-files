@@ -1,0 +1,8 @@
+source $HOME/Color-Scripts/color-scripts/crunchbang-mini
+export PATH=$HOME/spicetify-cli/:$HOME/bin:/usr/local/bin:$PATH
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+source ~/.ubuntu-zalias
+
+
+

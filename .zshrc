@@ -2,14 +2,10 @@
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # Load ubuntu stuff if present
-if [ -d "$HOME/dotfiles/.ubuntu-openbox-zshrc" ] ; then
+#
+if [ -f "$HOME/dotfiles/.ubuntu-openbox-zshrc" ] ; then
     source ~/dotfiles/.ubuntu-openbox-zshrc
 fi
-
-# This sets nvm path to environment variable
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-# This loads nvm
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
@@ -69,3 +65,6 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 #
 [ -f ~/dotfiles/.fzf.zsh ] && source ~/dotfiles/.fzf.zsh
+export PATH=/home/spezp/.pyenv/versions/3.7.2/bin:$PATH
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

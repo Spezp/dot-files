@@ -3,9 +3,9 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # Load ubuntu stuff if present
 #
-if [ -f "$HOME/dotfiles/.ubuntu-openbox-zshrc" ] ; then
-    source ~/dotfiles/.ubuntu-openbox-zshrc
-fi
+#if [ -f "$HOME/dot-files/.ubuntu-openbox-zshrc" ] ; then
+#    source ~/dot-files/.ubuntu-openbox-zshrc
+#fi
 
 PATH="$HOME/.local/kitty.app/bin:$PATH"
 # set PATH so it includes user's private bin if it exists
@@ -20,7 +20,11 @@ fi
 export ZSH="/home/spezp/.oh-my-zsh"
 
 # ZSH theme
-ZSH_THEME="spaceship"
+if [ ! -f "$ZSH/custom/themes/spaceship-prompt/spaceship.zsh-theme" ] ; then
+  echo $ZSH
+  git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH/custom/themes/spaceship-prompt" --depth=1
+  ln -s "$ZSH/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH/custom/themes/spaceship.zsh-theme" 
+fi
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -46,6 +50,13 @@ plugins=(git node npm)
 autoload -Uz compinit
 compinit
 
+SPACESHIP_CHAR_PREFIX=" "
+SPACESHIP_PROMPT_FIRST_PREFIX_SHOW=true
+SPACESHIP_DIR_PREFIX=" "
+SPACESHIP_GIT_BRANCH_COLOR=206
+ZSH_THEME="spaceship"
+
+
 source $ZSH/oh-my-zsh.sh
 
 
@@ -65,10 +76,10 @@ fi
 # For a full list of active aliases, run `alias`.
 # alias zshconfig="mate ~/.zshrc"
 #
-[ -f "$HOME/dot-files/.fzf.zsh" ] && source ~/dotfiles/.fzf.zsh
-[ -f "$HOME/.fzf.zsh" ] && source ~/.fzf.zsh
-if type ag &> /dev/null; then
-    export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
-fi
+[ -f "$HOME/dot-files/.fzf.zsh" ] && source ~/dot-files/.fzf.zsh
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 export PATH=/home/spezp/.pyenv/versions/3.7.2/bin:$PATH
 

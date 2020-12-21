@@ -132,6 +132,8 @@ let g:coc_global_extensions = [ 'coc-tsserver' ]
 " run prettier via Coc
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " coloring
+
+colorscheme snazzy
 highlight CocErrorFloat ctermfg=15
 highlight CocErrorFloat ctermbg=164
 

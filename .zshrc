@@ -7,6 +7,7 @@ if [ -f "$HOME/dotfiles/.ubuntu-openbox-zshrc" ] ; then
     source ~/dotfiles/.ubuntu-openbox-zshrc
 fi
 
+PATH="$HOME/.local/kitty.app/bin:$PATH"
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -40,7 +41,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git node npm)
 
 autoload -Uz compinit
 compinit
@@ -68,3 +69,5 @@ fi
 export PATH=/home/spezp/.pyenv/versions/3.7.2/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

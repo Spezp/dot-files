@@ -77,18 +77,13 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
-" Set the working directory to wherever the open file lives
-set autochdir
 
-"------------------------------------------------------------
-" Mappings 
-"
-" Useful mappings
-" ? Is this useful ? 
-nmap <Leader><C-f> :Ack
-nmap <Leader><C-t> :AckG 
+" Set the working directory to wherever the open file lives
+" set autochdir
+
 let mapleader = ";"
 " `gf` opens file under cursor in a new vertical split
 nnoremap gf :vertical wincmd f<CR>
@@ -122,29 +117,24 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 
 call plug#end()
-
-" Install pathogen if missing
-if empty(glob('~/.vim/autoload/pathogen.vim'))
-  silent !curl -fLo ~/.vim/autoload/pathogen.vim --create-dirs
-    \ https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-endif
-execute pathogen#infect()
+colorscheme snazzy
 " ----------------------------------------------------------------------
 " Plugin Mappings / Custom settings
 "
-" CTRL P
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-
 " COC
 " Do indentation according to filetype 
-" ? is this useful ? 
 filetype plugin indent on
+
 " global settings for coc extenstions
 let g:coc_global_extensions = [ 'coc-tsserver' ]
+
 " run prettier via Coc
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" coloring
+highlight CocErrorFloat ctermfg=15
+highlight CocErrorFloat ctermbg=164
+highlight Constant ctermfg=2
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>

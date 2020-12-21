@@ -20,7 +20,7 @@ fi
 export ZSH="/home/spezp/.oh-my-zsh"
 
 # ZSH theme
-ZSH_THEME="bira"
+ZSH_THEME="spaceship"
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -65,9 +65,10 @@ fi
 # For a full list of active aliases, run `alias`.
 # alias zshconfig="mate ~/.zshrc"
 #
-[ -f ~/dotfiles/.fzf.zsh ] && source ~/dotfiles/.fzf.zsh
+[ -f "$HOME/dot-files/.fzf.zsh" ] && source ~/dotfiles/.fzf.zsh
+[ -f "$HOME/.fzf.zsh" ] && source ~/.fzf.zsh
+if type ag &> /dev/null; then
+    export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
+fi
 export PATH=/home/spezp/.pyenv/versions/3.7.2/bin:$PATH
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

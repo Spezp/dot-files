@@ -77,13 +77,14 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
-
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
-
 " Set the working directory to wherever the open file lives
 " set autochdir
 
+"------------------------------------------------------------
+" Mappings 
+"
 let mapleader = ";"
 " `gf` opens file under cursor in a new vertical split
 nnoremap gf :vertical wincmd f<CR>
@@ -104,7 +105,8 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 call plug#begin('~/.vim/plugged')
 Plug 'jparise/vim-graphql'
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'connorholyday/vim-snazzy'
 Plug 'preservim/nerdtree'
 Plug 'pangloss/vim-javascript'
@@ -115,26 +117,24 @@ Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'mbbill/undotree'
 
 call plug#end()
-colorscheme snazzy
-" ----------------------------------------------------------------------
-" Plugin Mappings / Custom settings
-"
+
+" FZF mapping
+map <C-p> :GFiles<CR>
 " COC
 " Do indentation according to filetype 
+" ? is this useful ? 
 filetype plugin indent on
-
 " global settings for coc extenstions
 let g:coc_global_extensions = [ 'coc-tsserver' ]
-
 " run prettier via Coc
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
 " coloring
 highlight CocErrorFloat ctermfg=15
 highlight CocErrorFloat ctermbg=164
-highlight Constant ctermfg=2
+
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -143,4 +143,5 @@ map <C-n> :NERDTreeToggle<CR>
 " I don't know if I want this
 command Greview :Gdiff --staged
 nnoremap <leader>gr :Greview<cr>
-
+nnoremap <leader>gd2 :diffget //2<CR>
+nnoremap <leader>gd3 :diffget //3<CR>

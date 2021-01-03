@@ -50,12 +50,48 @@ plugins=(git node npm)
 autoload -Uz compinit
 compinit
 
-SPACESHIP_CHAR_PREFIX=" "
-SPACESHIP_PROMPT_FIRST_PREFIX_SHOW=true
-SPACESHIP_DIR_PREFIX=" "
+SPACESHIP_CHAR_PREFIX=""
+SPACESHIP_PROMPT_FIRST_PREFIX_SHOW=true  
+SPACESHIP_USER_PREFIX=""
+SPACESHIP_DIR_PREFIX=""
 SPACESHIP_GIT_BRANCH_COLOR=206
-ZSH_THEME="spaceship"
+SPACESHIP_USER_SHOW="always"
+SPACESHIP_HOST_SHOW="always"
+SPACESHIP_CHAR_SYMBOL="👾->"
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_RPROMPT_ORDER=(
+  user
+  host
+)
+SPACESHIP_PROMPT_ORDER=(
+  time          # Time stamps section
+  dir           # Current directory section
+  git           # Git section (git_branch + git_status)
+  package       # Package version
+  node          # Node.js section
+  ruby          # Ruby section
+  xcode         # Xcode section
+  golang        # Go section
+  php           # PHP section
+  rust          # Rust section
+  haskell       # Haskell Stack section
+  docker        # Docker section
+  aws           # Amazon Web Services section
+  venv          # virtualenv section
+  conda         # conda virtualenv section
+  pyenv         # Pyenv section
+  kubectl       # Kubectl context section
+  terraform     # Terraform workspace section
+  exec_time     # Execution time
+  line_sep      # Line break
+  battery       # Battery level and status
+  vi_mode       # Vi-mode indicator
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
 
+ZSH_THEME="spaceship"
 
 source $ZSH/oh-my-zsh.sh
 

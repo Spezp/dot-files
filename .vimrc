@@ -1,5 +1,6 @@
 " SPEZPS .vimrc
 "------------ VIM SET -------------
+set confirm
 set cursorline
 set diffopt+=vertical
 " formatoptions - No comment autowrap, no comment continuation with o / O. This is likely
@@ -81,6 +82,7 @@ nnoremap gf :vertical wincmd f<CR>
 
 " --------- APPEARANCE ------------
 colorscheme snazzy
+hi Normal guibg=NONE ctermbg=NONE
 highlight CocErrorFloat ctermfg=15
 highlight CocErrorFloat ctermbg=164
 

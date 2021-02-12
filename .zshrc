@@ -85,7 +85,9 @@ if [[ -n $SSH_CONNECTION ]]; then
 fi
 
 alias hangar="cd ~/gradient/hangar-bay"
+alias lsl="ls -1a"
 
+[ -f "$HOME/.secrets" ] && source "$HOME/.secrets"
 [ -f "$HOME/dot-files/.fzf.zsh" ] && source ~/dot-files/.fzf.zsh
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"

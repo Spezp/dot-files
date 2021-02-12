@@ -3,6 +3,7 @@
 set confirm
 set cursorline
 set diffopt+=vertical
+filetype plugin on
 " formatoptions - No comment autowrap, no comment continuation with o / O. This is likely
 " being overwritten by a plugin. Try to fix this shit.
 set autoindent
@@ -37,7 +38,10 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
-
+augroup WrapLineInMDFile
+    autocmd!
+    autocmd FileType md setlocal wrap
+augroup END
 "--------- BOOTSTRAPPING ---------
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -50,9 +54,11 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 "------------ PLUGINS ------------
 call plug#begin('~/.vim/plugged')
+Plug 'godlygeek/tabular'
 Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'connorholyday/vim-snazzy'
 Plug 'preservim/nerdtree'
 Plug 'pangloss/vim-javascript'
@@ -61,8 +67,10 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
+Plug 'reedes/vim-pencil'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'plasticboy/vim-markdown'
 Plug 'mbbill/undotree'
 call plug#end()
 
@@ -85,7 +93,12 @@ colorscheme snazzy
 hi Normal guibg=NONE ctermbg=NONE
 highlight CocErrorFloat ctermfg=15
 highlight CocErrorFloat ctermbg=164
+let g:vim_markdown_fenced_languages = ['js=javascript']
 
-
+" Put buffer line extension in status line :)
+let g:bufferline_echo = 0
+autocmd VimEnter *
+  \ let &statusline='%{bufferline#refresh_status()}'
+    \ .bufferline#get_status_string()
 
 

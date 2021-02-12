@@ -1,6 +1,7 @@
 kittySend () {
   kitty @ --to "unix:/tmp/mykitty" send-text $1\\x0d
 }
+alias lss="ls -1a"
 alias saver="~/Color-Scripts/color-scripts/pipes2"
 alias ktest="kitty --detach -o allow_remote_control --listen-on unix:/tmp/mykitty"
 alias kmatch='kitty @ --to "unix:/tmp/mykitty" send-text "cd "`pwd`\\x0d'

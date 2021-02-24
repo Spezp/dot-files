@@ -11,7 +11,7 @@ set cmdheight=2
 set expandtab
 set formatoptions-=cro
 set hlsearch
-set hidden
+set nohidden
 set ignorecase
 set laststatus=2
 set mouse=a
@@ -86,7 +86,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Open file under cursor in vsplit
 nnoremap gf :vertical wincmd f<CR>
-
+command! -nargs=0 Bd :bp\|bd \#
 
 " --------- APPEARANCE ------------
 colorscheme snazzy

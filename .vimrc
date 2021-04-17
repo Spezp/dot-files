@@ -3,15 +3,14 @@
 set confirm
 set cursorline
 set diffopt+=vertical
+
 filetype plugin on
-" formatoptions - No comment autowrap, no comment continuation with o / O. This is likely
-" being overwritten by a plugin. Try to fix this shit.
 set autoindent
 set cmdheight=2
 set expandtab
 set formatoptions-=cro
 set hlsearch
-set nohidden
+set hidden
 set ignorecase
 set laststatus=2
 set mouse=a
@@ -25,6 +24,8 @@ set showcmd
 set smartcase
 set softtabstop=2
 set tabstop=2
+set undofile
+set undodir=~/.vim/undo
 " terminal bell
 set t_vb=
 set visualbell
@@ -42,7 +43,9 @@ augroup WrapLineInMDFile
     autocmd!
     autocmd FileType md setlocal wrap
 augroup END
+
 "--------- BOOTSTRAPPING ---------
+"
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -53,6 +56,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 
 "------------ PLUGINS ------------
+"
 call plug#begin('~/.vim/plugged')
 Plug 'godlygeek/tabular'
 Plug 'jparise/vim-graphql'
@@ -75,13 +79,17 @@ Plug 'mbbill/undotree'
 call plug#end()
 
 "-------- PLUGIN CONFIGS ---------
-let g:coc_global_extensions = [ 'coc-tsserver' ]
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-prettier' ]
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
+let NERDTreeQuitOnOpen=1
 " ------------ MAPPING ------------
 let mapleader = ";"
 
-map <C-p> :GFiles<CR>
+" navigate
+map <C-p> :Rg<CR>
+map <Leader>b :Buffers
+map <Leader>n :bn
+map <Leader>p :bp
 map <C-n> :NERDTreeToggle<CR>
 
 " Open file under cursor in vsplit

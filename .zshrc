@@ -29,7 +29,7 @@ fi
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-plugins=(git node npm)
+plugins=(git node npm aws)
 
 autoload -Uz compinit
 compinit
@@ -53,18 +53,9 @@ SPACESHIP_PROMPT_ORDER=(
   git           # Git section (git_branch + git_status)
   package       # Package version
   node          # Node.js section
-  ruby          # Ruby section
-  xcode         # Xcode section
-  golang        # Go section
-  php           # PHP section
-  rust          # Rust section
   haskell       # Haskell Stack section
   docker        # Docker section
   aws           # Amazon Web Services section
-  venv          # virtualenv section
-  conda         # conda virtualenv section
-  pyenv         # Pyenv section
-  kubectl       # Kubectl context section
   terraform     # Terraform workspace section
   exec_time     # Execution time
   line_sep      # Line break
@@ -84,9 +75,14 @@ if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 fi
 
-alias hangar="cd ~/gradient/hangar-bay"
+alias cdh="cd ~/gradient/hangar-bay"
+alias cdhh="cd ~/gradient/hangar-bay/packages/hammer-head"
+alias cdh2="cd ~/gradient/hangar-bay-2"
+alias cdh2h="cd ~/gradient/hangar-bay-2/packages/hammer-head"
 alias lsl="ls -1a"
-
+alias yubi=". ${HOME}/scripts/yubi.bash"
+alias encryptfs-verify=". ${HOME}/encryptfs-verify"
+alias devkit="kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty --detach --session ~/dot-files/kitty/development.session.conf"
 [ -f "$HOME/.secrets" ] && source "$HOME/.secrets"
 [ -f "$HOME/dot-files/.fzf.zsh" ] && source ~/dot-files/.fzf.zsh
 
@@ -95,3 +91,5 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 export PATH=/home/spezp/.pyenv/versions/3.7.2/bin:$PATH
 
+export HUSKY_SKIP_HOOKS=1
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

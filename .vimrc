@@ -6,6 +6,7 @@ set diffopt+=vertical
 
 filetype plugin on
 set autoindent
+filetype plugin indent on
 set cmdheight=2
 set expandtab
 set formatoptions-=cro
@@ -26,6 +27,7 @@ set softtabstop=2
 set tabstop=2
 set undofile
 set undodir=~/.vim/undo
+set path+=**
 " terminal bell
 set t_vb=
 set visualbell
@@ -39,6 +41,8 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
+" Wrap lines when in Markdown
 augroup WrapLineInMDFile
     autocmd!
     autocmd FileType md setlocal wrap
@@ -62,43 +66,55 @@ Plug 'godlygeek/tabular'
 Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'stsewd/fzf-checkout.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'connorholyday/vim-snazzy'
 Plug 'preservim/nerdtree'
 Plug 'pangloss/vim-javascript'
 Plug 'bling/vim-bufferline'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+Plug 'leafgarland/typescript-vim' " syntax hi
+Plug 'peitalin/vim-jsx-typescript' " syntax hi
+Plug 'maxmellon/vim-jsx-pretty'   " syntax hi
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
 Plug 'reedes/vim-pencil'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'plasticboy/vim-markdown'
 Plug 'mbbill/undotree'
+Plug 'moll/vim-bbye'
 call plug#end()
 
 "-------- PLUGIN CONFIGS ---------
-let g:coc_global_extensions = [ 'coc-tsserver', 'coc-prettier' ]
+let g:coc_global_extensions = [ 'coc-prettier', 'coc-eslint' ]
+"let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } } 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 let NERDTreeQuitOnOpen=1
 " ------------ MAPPING ------------
-let mapleader = ";"
+let mapleader = " "
+
+" editing
+
+nmap <leader>w :w<CR> :Prettier<CR>jk
+" git
+nmap <leader>gl :diffget //3<CR>
+nmap <leader>gh :diffget //2<CR>
 
 " navigate
 map <C-p> :Rg<CR>
-map <Leader>b :Buffers
-map <Leader>n :bn
-map <Leader>p :bp
+map <Leader>b :Buffers<CR>
+map <Leader>n :bn<CR>
+map <Leader>p :bp<CR>
+map <leader>tp :tabprevious <CR>
+map <leader>tn :tabnext <CR>
 map <C-n> :NERDTreeToggle<CR>
-
+nnoremap <Leader>d :Bdelete<CR>
 " Open file under cursor in vsplit
 nnoremap gf :vertical wincmd f<CR>
 command! -nargs=0 Bd :bp\|bd \#
 
 " --------- APPEARANCE ------------
 colorscheme snazzy
-hi Normal guibg=NONE ctermbg=NONE
+"hi Normal guibg=NONE ctermbg=NONE
 highlight CocErrorFloat ctermfg=15
 highlight CocErrorFloat ctermbg=164
 let g:vim_markdown_fenced_languages = ['js=javascript']

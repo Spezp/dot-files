@@ -17,6 +17,7 @@ set mouse=a
 set nomodeline
 set nostartofline
 set nowrap
+set shortmess=a
 set number relativenumber
 set ruler
 set shiftwidth=2
@@ -43,11 +44,11 @@ let g:ale_fixers = ['tsserver']
 
 syntax on
 
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
+"if exists('+termguicolors')
+"  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"  set termguicolors
+"endif
 
 " Sets non active panes to norelativenumber
 augroup numbertoggle
@@ -78,12 +79,11 @@ autocmd FileType typescript* setlocal formatexpr=
 
 call plug#begin('~/.vim/plugged')
 Plug 'godlygeek/tabular'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'connorholyday/vim-snazzy'
-Plug 'preservim/nerdtree'
 Plug 'pangloss/vim-javascript'
 Plug 'bling/vim-bufferline'
 Plug 'leafgarland/typescript-vim' " syntax hi
